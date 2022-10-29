@@ -10,6 +10,8 @@ import os
 from datetime import datetime
 from typing import List
 from pyrogram.types import InlineKeyboardButton
+from shortzy import Shortzy
+
 from database.users_chats_db import db
 from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, SHORT_URL, SHORTENER_API, SHORTENER_WEBSITE
 from bs4 import BeautifulSoup
