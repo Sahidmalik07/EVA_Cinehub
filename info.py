@@ -58,6 +58,12 @@ MELCOW_NEW_TEXT = environ.get("MELCOW_NEW_TEXT", "Hey {mention} welcome to {chat
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
 SHORT_URL = is_enabled((environ.get('SHORT_URL', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
+
+SHORTENER_API = environ.get("SHORTENER_API", None)
+SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", None)
+SHORT_URL = is_enabled((environ.get('SHORT_URL', "False")), False)
+TUTORIAL_LINK = environ.get("TUTORIAL_LINK", "http://google.com/")
+
 MAINCHANNEL_ID = environ.get("MAINCHANNEL_ID", "-1001510870866")
 CHANNEL = environ.get('CUSTOM_FOOTER')
 PM_FILTER = is_enabled((environ.get('PM_FILTER', "False")), False)
