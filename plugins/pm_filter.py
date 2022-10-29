@@ -13,6 +13,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 from pyrogram.handlers import CallbackQueryHandler
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
+from utils import get_shortlink, get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
 from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
 from database.users_chats_db import db
 from database.ia_filterdb import Media, get_file_details, get_search_results
@@ -368,6 +369,25 @@ async def cb_handler(client: Client, query: CallbackQuery):
             alert = alert.replace("\\n", "\n").replace("\\t", "\t")
             await query.answer(alert, show_alert=True)
     if query.data.startswith("file"):
+        
+                # User Verifying
+        user_id = query.from_user.id
+        buttons = [
+                [
+                    InlineKeyboardButton(
+                        text="Verify", url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=verify_{user_id}")
+                    ),
+                ]
+                
+            ]
+
+        if not await db.is_user_verified(user_id):
+            text = f"You'r not verified today. Please verify now and get unlimited access for 1 day\n\n[How To Verify!]({TUTORIAL_LINK})"
+            if query.message.chat.type  == "private":
+
+                return await query.message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons))
+        # User Verifying 
+        
         ident, file_id = query.data.split("#")
         files_ = await get_file_details(file_id)
         user = query.message.reply_to_message.from_user.id
