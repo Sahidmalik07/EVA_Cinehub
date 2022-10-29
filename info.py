@@ -56,6 +56,7 @@ FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 MELCOW_NEW_TEXT = environ.get("MELCOW_NEW_TEXT", "Hey {mention} welcome to {chat}.\n be polite and don't use slung..")
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
+SHORT_URL = is_enabled((environ.get('SHORT_URL', "False")), False)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
 MAINCHANNEL_ID = environ.get("MAINCHANNEL_ID", "-1001510870866")
 CHANNEL = environ.get('CUSTOM_FOOTER')
