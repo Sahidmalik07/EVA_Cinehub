@@ -10,6 +10,7 @@ from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION, PROTECT_CONTENT
 from utils import get_settings, get_size, is_subscribed, save_group_settings, temp
+from utils import get_settings, get_shortlink, get_size, is_subscribed, save_group_settings, temp
 from database.connections_mdb import active_connection
 import re
 import json
@@ -100,6 +101,24 @@ async def start(client, message):
     except:
         file_id = data
         pre = ""
+        
+        # User Verifying
+    user_id = m.from_user.id
+    buttons = [
+            [
+                InlineKeyboardButton(
+                    text="Verify", url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=verify_{user_id}")
+                ),
+            ]
+            
+        ]
+
+    if not await db.is_user_verified(user_id):
+        return await m.reply_text(f"You'r not verified today. Please verify now and get unlimited access for 1 day\n\n[How To Verify!]({TUTORIAL_LINK})", reply_markup=InlineKeyboardMarkup(buttons))
+    
+    # User Verifying 
+    
+    
     if data.split("-", 1)[0] == "BATCH":
         sts = await message.reply("Please wait")
         file_id = data.split("-", 1)[1]
